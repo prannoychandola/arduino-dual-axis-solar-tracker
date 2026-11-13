@@ -2,6 +2,8 @@
 
 An Arduino Uno project that detects the direction of sunlight and rotates a solar panel toward the brighter direction on both the horizontal and vertical axes.
 
+![Black-and-white wiring and tracking sketch](solar-tracker-wiring.svg)
+
 ## How the tracking logic works
 
 The sketch reads four directional light values and averages them in pairs:
