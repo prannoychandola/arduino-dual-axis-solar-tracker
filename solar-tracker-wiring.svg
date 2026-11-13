@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" role="img" aria-labelledby="title desc">
+  <title id="title">Arduino Uno dual-axis solar tracker sketch</title>
+  <desc id="desc">A simple black-and-white diagram showing four directional light readings connected to Arduino Uno analog inputs, comparison logic, and two servo outputs for horizontal and vertical panel rotation.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M1,1 L9,5 L1,9" fill="none" stroke="#111" stroke-width="1.5"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #111; }
+      .title { font-size: 30px; font-weight: 700; letter-spacing: .5px; }
+      .subtitle { font-size: 16px; }
+      .head { font-size: 19px; font-weight: 700; }
+      .label { font-size: 16px; }
+      .small { font-size: 14px; }
+      .pin { font-size: 15px; font-weight: 700; }
+      .box { fill: #fff; stroke: #111; stroke-width: 2; }
+      .thin { fill: none; stroke: #111; stroke-width: 2; }
+      .wire { fill: none; stroke: #111; stroke-width: 2; marker-end: url(#arrow); }
+      .plainwire { fill: none; stroke: #111; stroke-width: 2; }
+      .dash { fill: none; stroke: #111; stroke-width: 1.5; stroke-dasharray: 7 6; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="960" fill="#fff"/>
+  <text x="720" y="54" text-anchor="middle" class="title">DUAL-AXIS SOLAR TRACKER</text>
+  <text x="720" y="82" text-anchor="middle" class="subtitle">Arduino Uno · sunlight detection and servo rotation logic</text>
+  <line x1="50" y1="108" x2="1390" y2="108" class="thin"/>
+
+  <!-- Directional light readings -->
+  <rect x="50" y="145" width="420" height="365" rx="4" class="box"/>
+  <text x="260" y="181" text-anchor="middle" class="head">DIRECTIONAL LIGHT READINGS</text>
+  <text x="260" y="207" text-anchor="middle" class="small">Four positions around the panel</text>
+  <rect x="82" y="234" width="154" height="74" class="box"/>
+  <text x="159" y="263" text-anchor="middle" class="label">TOP LEFT</text>
+  <text x="159" y="289" text-anchor="middle" class="pin">A0</text>
+  <rect x="284" y="234" width="154" height="74" class="box"/>
+  <text x="361" y="263" text-anchor="middle" class="label">TOP RIGHT</text>
+  <text x="361" y="289" text-anchor="middle" class="pin">A1</text>
+  <rect x="82" y="328" width="154" height="74" class="box"/>
+  <text x="159" y="357" text-anchor="middle" class="label">BOTTOM LEFT</text>
+  <text x="159" y="383" text-anchor="middle" class="pin">A2</text>
+  <rect x="284" y="328" width="154" height="74" class="box"/>
+  <text x="361" y="357" text-anchor="middle" class="label">BOTTOM RIGHT</text>
+  <text x="361" y="383" text-anchor="middle" class="pin">A3</text>
+  <text x="260" y="445" text-anchor="middle" class="small">Each reading represents light from that direction.</text>
+  <text x="260" y="470" text-anchor="middle" class="small">The brighter side guides the correction.</text>
+  <path d="M470 267 H520" class="wire"/>
+  <text x="495" y="250" text-anchor="middle" class="small">A0-A3</text>
+
+  <!-- Arduino Uno logic -->
+  <rect x="520" y="145" width="420" height="595" rx="4" class="box"/>
+  <text x="730" y="188" text-anchor="middle" class="head">ARDUINO UNO</text>
+  <line x1="550" y1="210" x2="910" y2="210" class="thin"/>
+  <text x="560" y="246" class="head">Read and compare</text>
+  <text x="560" y="279" class="label">Horizontal: average left vs. right</text>
+  <text x="560" y="306" class="small">(A0 + A2) / 2  compared with  (A1 + A3) / 2</text>
+  <text x="560" y="346" class="label">Vertical: average top vs. bottom</text>
+  <text x="560" y="373" class="small">(A0 + A1) / 2  compared with  (A2 + A3) / 2</text>
+  <line x1="550" y1="398" x2="910" y2="398" class="thin"/>
+  <text x="560" y="434" class="head">Tracking response</text>
+  <text x="560" y="466" class="label">Ignore small differences (deadband)</text>
+  <text x="560" y="496" class="label">Nudge each axis toward brighter light</text>
+  <text x="560" y="526" class="label">Limit movement to the set angle range</text>
+  <line x1="550" y1="548" x2="910" y2="548" class="thin"/>
+  <text x="560" y="584" class="head">Servo outputs</text>
+  <text x="560" y="618" class="label">D9  →  horizontal / azimuth</text>
+  <text x="560" y="650" class="label">D10 →  vertical / elevation</text>
+  <text x="560" y="700" class="small">Both axes update independently.</text>
+
+  <!-- Panel and axes -->
+  <rect x="1000" y="145" width="390" height="300" rx="4" class="box"/>
+  <text x="1195" y="181" text-anchor="middle" class="head">PANEL ORIENTATION</text>
+  <path d="M1083 256 L1218 224 L1304 264 L1169 296 Z" class="thin"/>
+  <path d="M1169 296 L1169 341 L1304 309 L1304 264" class="thin"/>
+  <path d="M1083 256 L1083 301 L1169 341" class="thin"/>
+  <path d="M1134 235 L1220 276 M1184 223 L1270 264" class="thin"/>
+  <path d="M1090 361 C1133 397 1237 404 1306 366" class="wire"/>
+  <text x="1197" y="425" text-anchor="middle" class="small">Horizontal rotation: azimuth</text>
+  <path d="M1060 331 C1034 293 1035 247 1060 217" class="wire"/>
+  <text x="1030" y="285" text-anchor="middle" class="small" transform="rotate(-90 1030 285)">Vertical tilt: elevation</text>
+
+  <!-- Output connections -->
+  <path d="M940 618 H982 V529 H1015" class="wire"/>
+  <path d="M940 650 H974 V614 H1015" class="wire"/>
+  <rect x="1015" y="492" width="345" height="74" rx="4" class="box"/>
+  <text x="1187" y="522" text-anchor="middle" class="label">AZIMUTH SERVO</text>
+  <text x="1187" y="547" text-anchor="middle" class="pin">Signal: D9</text>
+  <rect x="1015" y="578" width="345" height="74" rx="4" class="box"/>
+  <text x="1187" y="608" text-anchor="middle" class="label">ELEVATION SERVO</text>
+  <text x="1187" y="633" text-anchor="middle" class="pin">Signal: D10</text>
+  <text x="1187" y="689" text-anchor="middle" class="small">Reverse an axis in the sketch if its direction is opposite.</text>
+
+  <!-- Power and common ground note -->
+  <rect x="50" y="785" width="1340" height="105" rx="4" class="box"/>
+  <text x="78" y="823" class="head">SETUP NOTES</text>
+  <text x="78" y="852" class="label">Use the pin mapping shown above. Adjust the deadband and angle limits in the sketch for your setup.</text>
+  <text x="78" y="877" class="small">Power the servos appropriately for your build and connect their ground to Arduino GND.</text>
+  <text x="720" y="930" text-anchor="middle" class="small">SolarTracker.ino · Default pin mapping shown</text>
+</svg>
+
